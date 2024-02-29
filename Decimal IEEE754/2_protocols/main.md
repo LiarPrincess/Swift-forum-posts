@@ -25,9 +25,32 @@ This conversion may not be exact, so it is basically a random number generator.
 
 If this gets fixed then: yes.
 
+Update 29.02.2024: You probably can't use `ExpressibleByFloatLiteral`, because [in stdlib we have](https://github.com/apple/swift/blob/main/stdlib/public/core/CompilerProtocols.swift#L321):
+
+```swift
+public protocol _ExpressibleByBuiltinFloatLiteral {
+  init(_builtinFloatLiteral value: _MaxBuiltinFloatType)
+}
+
+public protocol ExpressibleByFloatLiteral {
+  associatedtype FloatLiteralType: _ExpressibleByBuiltinFloatLiteral
+  init(floatLiteral value: FloatLiteralType)
+}
+
+#if !(os(Windows) || os(Android)) && (arch(i386) || arch(x86_64))
+public typealias _MaxBuiltinFloatType = Builtin.FPIEEE80
+#else
+public typealias _MaxBuiltinFloatType = Builtin.FPIEEE64
+#endif
+```
+
+---
+
+Old content:
+
 I see people proposing a new `protocol` for this, but can't we just use `ExpressibleByFloatLiteral`? We would need to add a new type to `associatedtype FloatLiteralType: _ExpressibleByBuiltinFloatLiteral`. This should be purely additive, because `Float/Double/Float80` would use `Float/Double/Float80` (same as currently - no changes).
 
-The design of the new `_ExpressibleByBuiltinFloatLiteral` type is out of scope here, but you need to support compiler errors for `isInexact` and hex character sequences for (quote from standard):
+The design of the new `_ExpressibleByBuiltinFloatLiteral` type is out of scope here, but you need to support compiler errors for `isInexact`. I feel like hex character sequences are kind of optional, oh-my-decimal does not even have them (and we have FMA, being more useless than FMA on `Decimal` is quite a thing) (quote from standard):
 
 > 5.4.3 Conversion operations for binary formats<br/>
 > Implementations shall provide the following formatOf conversion operations to and from all supported binary floating-point formats; these operations never propagate non-canonical floating-point results.<br/>
@@ -48,7 +71,7 @@ Required by `Numeric` protocol, and as we know `FloatingPoint` requires `Numeric
 
 Yes!
 
-But how? We need to preserve sign/exponent/significant/cohort/payload/signaling bit etc. What do we do with non-canonical values?
+But how? We need to preserve sign/exponent/significant/payload/signaling bit etc. What do we do with non-canonical values?
 
 Oh-my-decimal uses binary encoding (`BID`). We need to remember that receiver may not support parsing `UInt128` - most of the languages stop at `UInt64`, the worst case would be if they tried to parse it as `Double` (ekhm… JavaScript). If we store each value as `String` then it should not be a problem -> they will fix it in post-processing. Why `BID` not `DPD`? It was easier for me.
 
@@ -81,7 +104,7 @@ print(Decimal64.greatestFiniteMagnitude) // 9999999999999999E+369
 print(Decimal64("123")!) // 123E+0
 print(Decimal64("-123")!) // -123E+0
 print(Decimal64("123E2")!) // 123E+2
-print(Decimal64("12300E0")!) // 12300E+0, same value as above, different cohort
+print(Decimal64("12300E0")!) // 12300E+0, same value as above, different cohort member
 ```
 
 I'm not sure what is the correct answer for Swift. `String` representation is not a bad choice, even with all of its drawbacks.

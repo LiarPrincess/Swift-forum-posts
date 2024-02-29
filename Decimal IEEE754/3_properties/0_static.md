@@ -15,8 +15,8 @@ static var greatestFiniteMagnitude: Self { get }
 static var radix: Int { 10 }
 ```
 
-- `0` - which cohort/sign/exponent? In Oh-my-decimal it is `0E+0`.
-- `leastNormalMagnitude` - which cohort? In Oh-my-decimal: `Decimal64.leastNormalMagnitude = 1000000000000000E-398` - all 'precision' digits filled = lowest exponent.
+- `0` - which sign/exponent/etc? In Oh-my-decimal it is `0E+0`.
+- `leastNormalMagnitude` - which cohort member? In Oh-my-decimal: `Decimal64.leastNormalMagnitude = 1000000000000000E-398` - all 'precision' digits filled = lowest exponent.
 - `greatestFiniteMagnitude` - interestingly this one has to use `pack`. You can't just use `Self.maxDecimalDigits` and `Self.maxExponent` because `Decimal128` does not need the `11` in combination bits (though this is an implementation detail).
 - `pi` should be rounded `.towardZero`.
 

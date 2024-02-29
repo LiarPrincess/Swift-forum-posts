@@ -87,6 +87,6 @@ print(Decimal64("123E2")!) // 123E+2
 print(Decimal64("12300E0")!) // 12300E+0
 ```
 
-Oh-my-decimal returns unambiguous value in the following format: `[-][significand]E[signed exponent]`. Note that no cohort modification happens (`123E+2 == 12300E+0` but they are printed differently) and the exponent is always present even if it is `0`.
+Oh-my-decimal returns unambiguous value in the following format: `[-][significand]E[signed exponent]`. Note that no within-cohort modification happens (`123E+2 == 12300E+0` but they are printed differently) and the exponent is always present even if it is `0`.
 
 Swift probably also wants `NumberFormatter`.

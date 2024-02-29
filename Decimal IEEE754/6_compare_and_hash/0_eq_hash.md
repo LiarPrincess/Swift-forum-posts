@@ -27,7 +27,7 @@ func isLessThanOrEqualTo(_ other: Self, status: inout DecimalStatus) -> Bool
 
 Almost everything is defined in the standard:
 - `+0 == -0` for any sign and exponent.
-- different cohorts of the same value are equal.
+- different cohort members with the same value are equal.
 - non-canonical values should be equal to `±0`.
 - `NaNs` are never equal.
 - etc…

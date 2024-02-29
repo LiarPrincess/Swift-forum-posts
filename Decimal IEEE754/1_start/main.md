@@ -1,3 +1,7 @@
+Update 29.02.2024:
+- proper cohort usage
+- changes in `ExpressibleByFloatLiteral`
+
 [github.com/LiarPrincess/Oh-my-decimal](https://github.com/LiarPrincess/Oh-my-decimal) is about 95% of what you need. Almost any design of `DecimalFloatingPoint` should be a subset of what is implemented in this repository. Not tested on Apple silicon.
 
 Vocabulary (`oh-my-decimal` uses the same names in code):
