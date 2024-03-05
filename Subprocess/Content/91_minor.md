@@ -1,6 +1,6 @@
 ## `SystemPackage.Errno`
 
-Swift system [has a really nice `Errno` type](https://github.com/apple/swift-system/blob/main/Sources/System/Errno.swift):
+Swift system [has a really nice `Errno` type](https://github.com/apple/swift-system/blob/main/Sources/System/Errno.swift) that may simplify your implementation:
 
 ```swift
 do {
