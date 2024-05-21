@@ -1,0 +1,21 @@
+.DS_Store
+/.build
+/.venv
+*.out
+
+gmp/*
+!gmp/.gitkeep
+
+Sources/Attaswift/*
+!Sources/Attaswift/Run setup script first.txt
+
+Sources/Numberick/*
+!Sources/Numberick/Run setup script first.txt
+
+Sources/NumberickCore/*
+!Sources/NumberickCore/Run setup script first.txt
+
+Sources/Violet/*
+!Sources/Violet/Run setup script first.txt
+
+Zip

@@ -1,0 +1,38 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": ["swift"],
+      "args": [],
+      "cwd": "${workspaceFolder:Vapor Fibonacci BigInt}",
+      "name": "Debug Main",
+      "program": "${workspaceFolder:Vapor Fibonacci BigInt}/.build/debug/Main",
+      "preLaunchTask": "swift: Build Debug Main"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": ["swift"],
+      "args": [],
+      "cwd": "${workspaceFolder:Vapor Fibonacci BigInt}",
+      "name": "Release Main",
+      "program": "${workspaceFolder:Vapor Fibonacci BigInt}/.build/release/Main",
+      "preLaunchTask": "swift: Build Release Main"
+    },
+    {
+      "name": "1 Setup",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "1_setup.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "4 Create tables",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "4_create_tables.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}
