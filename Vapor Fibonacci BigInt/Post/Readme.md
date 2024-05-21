@@ -203,13 +203,8 @@ Also, setting an index in an `Array` does another `isUniquelyReferenced` check w
 Also, as already pointed out in this thread, `BigInt` operations should strive to be `inout` to avoid buffer allocations. The whole `BigInt` has to be written with this in mind.
 
 
-|Count|Node|Attaswift|Attaswift_inout|Numberick|Numberick_inout|Violet|Violet_inout|
-|-----|----|---------|---------------|---------|---------------|------|------------|
-|   10000|0.0028444|<span style="color:#df1c44">0.013141 (0.216x)</span>|<span style="color:#df1c44">0.0099377 (0.286x)</span>|<span style="color:#df1c44">0.004029 (0.706x)</span>|0.0028562 (0.996x)|<span style="color:#39a275">0.0019838 (1.43x)</span>|<span style="color:#39a275">0.00091961 (3.09x)</span>
-|   30000|0.015971|<span style="color:#df1c44">0.081476 (0.196x)</span>|<span style="color:#df1c44">0.067276 (0.237x)</span>|<span style="color:#df1c44">0.030341 (0.526x)</span>|<span style="color:#df1c44">0.022008 (0.726x)</span>|<span style="color:#39a275">0.010447 (1.53x)</span>|<span style="color:#39a275">0.0049653 (3.22x)</span>
-|  100000|0.12162|<span style="color:#df1c44">0.6063 (0.201x)</span>|<span style="color:#df1c44">0.59103 (0.206x)</span>|<span style="color:#df1c44">0.24341 (0.5x)</span>|<span style="color:#df1c44">0.21888 (0.556x)</span>|<span style="color:#39a275">0.073334 (1.66x)</span>|<span style="color:#39a275">0.046469 (2.62x)</span>
-|  300000|0.86641|<span style="color:#df1c44">5.1031 (0.17x)</span>|<span style="color:#df1c44">5.3454 (0.162x)</span>|<span style="color:#df1c44">2.0653 (0.42x)</span>|<span style="color:#df1c44">1.9327 (0.448x)</span>|<span style="color:#39a275">0.502 (1.73x)</span>|<span style="color:#39a275">0.37492 (2.31x)</span>
-| 1000000|9.7038|<span style="color:#df1c44">54.488 (0.178x)</span>|<span style="color:#df1c44">59.466 (0.163x)</span>|<span style="color:#df1c44">22.644 (0.429x)</span>|<span style="color:#df1c44">21.479 (0.452x)</span>|<span style="color:#39a275">5.3381 (1.82x)</span>|<span style="color:#39a275">4.0418 (2.4x)</span>
+
+![Perf-Fibonacci-inout](Perf-Fibonacci-inout.png)
 
 
 This gives us:
